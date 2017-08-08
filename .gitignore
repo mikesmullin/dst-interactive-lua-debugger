@@ -1,0 +1,8 @@
+/*
+!/.gitignore
+!/data
+/data/*
+!/data/scripts
+!/mods
+/mods/*
+!/mods/*.lua
