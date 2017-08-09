@@ -401,7 +401,7 @@ end
 function encodeString(s)
   s = string.gsub(s,'\\','\\\\')
   s = string.gsub(s,'"','\\"')
-  s = string.gsub(s,"'","\\'")
+  --Ss = string.gsub(s,"'","\\'") -- wtf this is invalid json! -mks
   s = string.gsub(s,'\n','\\n')
   s = string.gsub(s,'\t','\\t')  
   s = string.gsub(s,'\r','\\r')
