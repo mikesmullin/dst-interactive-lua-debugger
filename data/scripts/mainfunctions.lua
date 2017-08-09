@@ -1276,6 +1276,9 @@ end
 
 function OnFocusGained()
     --check that we are in gameplay, not main menu
+    -- if Debuggee then
+        -- Debuggee.poll()
+    -- end
     if inGamePlay then
         if PLATFORM == "ANDROID" then
             SetPause(false)
