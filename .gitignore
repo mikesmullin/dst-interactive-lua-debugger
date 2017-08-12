@@ -3,6 +3,8 @@
 !/data
 /data/*
 !/data/scripts
+!/data/disk-to-socket-proxy.js
 !/mods
 /mods/*
 !/mods/*.lua
+!/launcher.bat
