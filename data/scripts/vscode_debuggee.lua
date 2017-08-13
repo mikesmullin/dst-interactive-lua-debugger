@@ -1,3 +1,5 @@
+-- print("MikesPlugin: debuggee initializing")
+
 local debuggee = {}
 
 -- local socket = require 'socket.core'
@@ -468,9 +470,14 @@ local function debugLoop()
 end
 
 -------------------------------------------------------------------------------
+function debuggee.easyStart()
+	local startResult, breakerType = debuggee.start(require('json')) --, {dumpCommunication=true})
+	-- print('debuggee start ->', startResult, breakerType)
+end
+
 -- local sockArray = {}
 function debuggee.start(jsonLib, config)
-	print('debuggee: init')
+	-- print('debuggee: init')
 	json = jsonLib
 	assert(jsonLib)
 	
@@ -511,12 +518,12 @@ function debuggee.start(jsonLib, config)
 	-- sock:setoption('tcp-nodelay', true)
 
 	local initMessage = nil
-	print('debuggee: waiting for filesystem proxy connection...')
+	-- print('debuggee: waiting for filesystem proxy connection...')
 	while initMessage == nil do
 		initMessage = recvMessage()
 	end
 	assert(initMessage and initMessage.command == 'welcome')
-	print('debuggee: handshake complete.')
+	-- print('debuggee: handshake complete.')
 	connected = true
 	sourceBasePath = initMessage.sourceBasePath
 	directorySeperator = initMessage.directorySeperator

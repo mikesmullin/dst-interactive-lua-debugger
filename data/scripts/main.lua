@@ -1,6 +1,10 @@
 -- Override the package.path in luaconf.h because it is impossible to find
 package.path = "scripts\\?.lua;scriptlibs\\?.lua"
 
+require("json")
+-- require("vscode_debuggee").easyStart()
+
+
 math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
 math.random()
 
@@ -101,35 +105,12 @@ end
 require("strict")
 require("debugprint")
 -- add our print loggers
+--S overrides print() output to client_log.txt
 AddPrintLogger(function(...) TheSim:LuaPrint(...) end)
-
 
 require("config")
 require("vector3")
---S invoking print() before this line will crash the app
---S the mainfunctions module provides a print() fn that outputs to log
 require("mainfunctions")
-require("json")
-
-print("MikesPlugin: begin initialization")
-global("Debuggee")
---S added by Mike for debugging purposes
---S see https://marketplace.visualstudio.com/items?itemName=devCAT.lua-debug
--- package.path = package.path ..
-  -- '?;?.lua;C:\\Program Files (x86)\\LuaRocks\\lua\\?.lua;' ..
-	-- 'C:\\Program Files (x86)\\LuaRocks\\lua\\?\\init.lua;' ..
-	-- 'C:\\Users\\Mike\\AppData\\Roaming\\LuaRocks\\share\\lua\\5.1\\?.lua;' ..
-	-- 'C:\\Users\\Mike\\AppData\\Roaming\\LuaRocks\\share\\lua\\5.1\\?\\init.lua;' ..
-	-- 'C:\\Program Files (x86)\\LuaRocks\\systree\\share\\lua\\5.1\\?.lua;' ..
-	-- 'C:\\Program Files (x86)\\LuaRocks\\systree\\share\\lua\\5.1\\?\\init.lua;'
--- package.cpath = package.cpath ..
--- 	'C:\\Users\\Mike\\AppData\\Roaming\\LuaRocks\\lib\\lua\\5.1\\?.dll;' ..
--- 	'C:\\Program Files (x86)\\LuaRocks\\systree\\lib\\lua\\5.1\\?.dll;'
--- local dkjson = require 'dkjson'
-local debuggee = require 'vscode_debuggee'
-local startResult, breakerType = debuggee.start(json) --, {dumpCommunication=true})
--- print('debuggee start ->', startResult, breakerType)
-Debuggee = debuggee
 
 require("preloadsounds")
 
@@ -342,10 +323,12 @@ require "debughelpers"
 
 require "consolecommands"
 
---debug key init
--- if CHEATS_ENABLED then
+-- debug key init
+if CHEATS_ENABLED then
     require "debugcommands"
     require "debugkeys"
--- end
+end
+
+
 
 TheSystemService:SetStalling(false)
