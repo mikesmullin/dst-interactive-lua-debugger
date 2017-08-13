@@ -880,7 +880,7 @@ local function AddListener(t, event, inst, fn)
 end
 
 function EntityScript:ListenForEvent(event, fn, source)
-    --print ("Listen for event", self, event, source)
+    -- print ("Listen for event", self, event, source)
     source = source or self
     
     if not source.event_listeners then
@@ -983,6 +983,7 @@ function EntityScript:StopAllWatchingWorldStates()
 end
 
 function EntityScript:PushEvent(event, data)
+    -- print ("PushEvent", self, event, data)
     if self.event_listeners then
         local listeners = self.event_listeners[event]
         if listeners then
