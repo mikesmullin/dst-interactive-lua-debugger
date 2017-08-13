@@ -470,6 +470,10 @@ local function debugLoop()
 end
 
 -------------------------------------------------------------------------------
+function debuggee.disable()
+	sethook()
+end
+
 function debuggee.easyStart()
 	local startResult, breakerType = debuggee.start(require('json')) --, {dumpCommunication=true})
 	-- print('debuggee start ->', startResult, breakerType)
