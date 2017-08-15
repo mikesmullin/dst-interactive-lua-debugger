@@ -982,8 +982,11 @@ function EntityScript:StopAllWatchingWorldStates()
     end
 end
 
+
+
+
 function EntityScript:PushEvent(event, data)
-    -- print ("PushEvent", self, event, data)
+    -- print ("PushEvent", self, event, require('serpent').block(data))
     if self.event_listeners then
         local listeners = self.event_listeners[event]
         if listeners then
